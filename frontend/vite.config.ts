@@ -8,6 +8,7 @@ export default defineConfig({
       "@": "/src",
       "@components": "/src/components",
       "@assets": "/src/assets",
+      "@data": "/src/data",
     },
     tsconfigPaths: true,
   },

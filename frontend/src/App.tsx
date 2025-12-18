@@ -10,7 +10,7 @@ function App() {
   }
   return (
     <>
-      <h1 className='title'>Cards Massa 🔥!</h1>
+      <h1 className='title'>LuckiFicha 🔥!</h1>
       <SearchBar propagateSearch={getSearch} />
       <CharList filter={filterChar} />
     </>

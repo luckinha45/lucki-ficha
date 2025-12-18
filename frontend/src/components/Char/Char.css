@@ -1,14 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
-
 .char {
-    background-color: rgb(128, 0, 0);
+    background-color: rgb(136, 4, 129);
     padding: 5px;
     width: 12vw;
-    /* height: fit-content; */
     border: 1px solid #ccc;
     border-radius: 8px;
-    /* overflow: hidden; */
-    font-family: Arial, sans-serif;
+    text-align: center;
 }
 
 .char:hover {
@@ -19,16 +15,21 @@
 .char-image {
     width: 100%;
     height: 220px;
-    border-radius: 8px;
     object-fit: contain;
 }
 
 .char-name {
     font-family: "MedievalSharp", cursive;
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
     font-size: 1fr;
-    text-align: center;
-    overflow: hidden;
     color: white;
+    overflow: hidden;
+
+    margin-bottom: 2px;
+}
+
+.info {
+    margin: 0px;
+    font-size: 13px;
 }
