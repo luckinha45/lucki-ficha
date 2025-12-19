@@ -18,16 +18,11 @@ export default function CharList(props: Props) {
   }, []);
 
   return <div className='flex-cards'>
-    {chars == null || chars === undefined ? <p>Loading...</p> : chars
+    {
+      chars == null || chars === undefined ? <p>Loading...</p> : chars
       .filter(char => char.Name.toLowerCase().includes(props.filter.toLowerCase()))
-      .map((char, idx) => {
-        return <Char
-          key={char.Id}
-          name={char.Name}
-          img={char.ImgUrl}
-        />
-    })
-    .sort((a, b) => a.props.name.localeCompare(b.props.name))
+      .sort((a, b) => a.Name.localeCompare(b.Name))
+      .map(char => { return <Char key={char.Id} name={char.Name} img={char.ImgUrl} /> })
     }
   </div>
 }

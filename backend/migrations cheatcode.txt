@@ -1,0 +1,5 @@
+gerar nova migration:
+dotnet ef migrations add Ini
+
+executar migration:
+dotnet ef database update
