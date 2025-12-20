@@ -12,8 +12,8 @@ using backend;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251218201319_Init")]
-    partial class Init
+    [Migration("20251219133206_removed_required_timestamps")]
+    partial class removed_required_timestamps
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,6 @@ namespace backend.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Descr")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("FichaT20Id")
@@ -45,9 +44,8 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Peso")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Peso")
+                        .HasColumnType("int");
 
                     b.Property<int>("Preco")
                         .HasColumnType("int");
@@ -94,7 +92,6 @@ namespace backend.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ImgUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Inteligencia")
@@ -131,7 +128,7 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sheet");
+                    b.ToTable("FichaT20");
                 });
 
             modelBuilder.Entity("backend.Models.HabilidadeT20", b =>
@@ -165,7 +162,7 @@ namespace backend.Migrations
 
                     b.HasIndex("FichaId");
 
-                    b.ToTable("Habilidades");
+                    b.ToTable("HabilidadeT20");
                 });
 
             modelBuilder.Entity("backend.Models.ModT20", b =>
@@ -209,7 +206,7 @@ namespace backend.Migrations
                     b.ToTable("ModT20");
                 });
 
-            modelBuilder.Entity("backend.Models.Pericia", b =>
+            modelBuilder.Entity("backend.Models.PericiaT20", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -235,7 +232,7 @@ namespace backend.Migrations
 
                     b.HasIndex("FichaT20Id");
 
-                    b.ToTable("Pericia");
+                    b.ToTable("PericiaT20");
                 });
 
             modelBuilder.Entity("backend.Models.EquipamentoT20", b =>
@@ -275,7 +272,7 @@ namespace backend.Migrations
                     b.Navigation("Habilidade");
                 });
 
-            modelBuilder.Entity("backend.Models.Pericia", b =>
+            modelBuilder.Entity("backend.Models.PericiaT20", b =>
                 {
                     b.HasOne("backend.Models.FichaT20", "FichaT20")
                         .WithMany("Pericias")

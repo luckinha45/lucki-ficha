@@ -6,20 +6,20 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace backend.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Ini : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Sheet",
+                name: "FichaT20",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Classe = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Raca = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Nivel = table.Column<int>(type: "int", nullable: false),
                     Experiencia = table.Column<int>(type: "int", nullable: false),
                     Dinheiro = table.Column<int>(type: "int", nullable: false),
@@ -38,7 +38,7 @@ namespace backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sheet", x => x.Id);
+                    table.PrimaryKey("PK_FichaT20", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,8 +47,8 @@ namespace backend.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Descr = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Peso = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Peso = table.Column<int>(type: "int", nullable: false),
                     Preco = table.Column<int>(type: "int", nullable: false),
                     FichaT20Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -58,15 +58,15 @@ namespace backend.Migrations
                 {
                     table.PrimaryKey("PK_EquipamentoT20", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EquipamentoT20_Sheet_FichaT20Id",
+                        name: "FK_EquipamentoT20_FichaT20_FichaT20Id",
                         column: x => x.FichaT20Id,
-                        principalTable: "Sheet",
+                        principalTable: "FichaT20",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Habilidades",
+                name: "HabilidadeT20",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -79,17 +79,17 @@ namespace backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Habilidades", x => x.Id);
+                    table.PrimaryKey("PK_HabilidadeT20", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Habilidades_Sheet_FichaId",
+                        name: "FK_HabilidadeT20_FichaT20_FichaId",
                         column: x => x.FichaId,
-                        principalTable: "Sheet",
+                        principalTable: "FichaT20",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pericia",
+                name: "PericiaT20",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -101,11 +101,11 @@ namespace backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pericia", x => x.Id);
+                    table.PrimaryKey("PK_PericiaT20", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pericia_Sheet_FichaT20Id",
+                        name: "FK_PericiaT20_FichaT20_FichaT20Id",
                         column: x => x.FichaT20Id,
-                        principalTable: "Sheet",
+                        principalTable: "FichaT20",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -133,9 +133,9 @@ namespace backend.Migrations
                         principalTable: "EquipamentoT20",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ModT20_Habilidades_HabilidadeId",
+                        name: "FK_ModT20_HabilidadeT20_HabilidadeId",
                         column: x => x.HabilidadeId,
-                        principalTable: "Habilidades",
+                        principalTable: "HabilidadeT20",
                         principalColumn: "Id");
                 });
 
@@ -145,8 +145,8 @@ namespace backend.Migrations
                 column: "FichaT20Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Habilidades_FichaId",
-                table: "Habilidades",
+                name: "IX_HabilidadeT20_FichaId",
+                table: "HabilidadeT20",
                 column: "FichaId");
 
             migrationBuilder.CreateIndex(
@@ -160,8 +160,8 @@ namespace backend.Migrations
                 column: "HabilidadeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pericia_FichaT20Id",
-                table: "Pericia",
+                name: "IX_PericiaT20_FichaT20Id",
+                table: "PericiaT20",
                 column: "FichaT20Id");
         }
 
@@ -172,16 +172,16 @@ namespace backend.Migrations
                 name: "ModT20");
 
             migrationBuilder.DropTable(
-                name: "Pericia");
+                name: "PericiaT20");
 
             migrationBuilder.DropTable(
                 name: "EquipamentoT20");
 
             migrationBuilder.DropTable(
-                name: "Habilidades");
+                name: "HabilidadeT20");
 
             migrationBuilder.DropTable(
-                name: "Sheet");
+                name: "FichaT20");
         }
     }
 }

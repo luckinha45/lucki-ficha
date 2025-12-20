@@ -48,7 +48,7 @@ public class AppDbContext : DbContext
             .HasForeignKey(m => m.EquipamentoId);
     }
 
-    public override int SaveChanges()
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         var now = DateTime.UtcNow;
 
@@ -63,12 +63,11 @@ public class AppDbContext : DbContext
 
                 case EntityState.Modified:
                     entry.Entity.UpdatedAt = now;
-                    // Ensure CreatedAt is not accidentally modified
                     entry.Property(x => x.CreatedAt).IsModified = false; 
                     break;
             }
         }
 
-        return base.SaveChanges();
+        return await base.SaveChangesAsync(cancellationToken);
     }
 }
