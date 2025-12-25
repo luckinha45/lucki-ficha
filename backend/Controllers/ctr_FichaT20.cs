@@ -23,14 +23,14 @@ public class CtrFicha : ControllerBase
     public async Task<IActionResult> GetFichas()
     {
         var fichas = await _db.FichaT20
-            .Include(f => f.Habilidades)
-            .Include(f => f.Equipamentos)
-            .Include(f => f.Pericias)
+            // .Include(f => f.Habilidades)
+            // .Include(f => f.Equipamentos)
+            // .Include(f => f.Pericias)
             .ToListAsync();
 
 
-        var fichasDto = _mapper.Map<List<Models.FichaT20Dto>>(fichas);
-        return Ok(fichasDto);
+        // var fichasDto = _mapper.Map<List<Models.FichaT20Dto>>(fichas);
+        return Ok(fichas.Select(f => new { f.Id, f.Nome, f.ImgUrl }));
     }
 
     [HttpGet("ficha-t20/{id}")]

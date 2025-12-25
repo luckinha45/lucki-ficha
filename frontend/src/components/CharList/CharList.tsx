@@ -1,28 +1,16 @@
 import './CharList.css';
 import Char from '../Char/Char';
-import { useEffect, useState } from 'react';
-import { api } from 'services/api';
-import type { MdlSheet } from 'types/MdlSheet';
+import type { FichaT20 } from '@/types/FichaT20';
 
 interface Props {
-  filter: string;
+  fichas: FichaT20[];
 }
 
 export default function CharList(props: Props) {
-  const [chars, setChars] = useState<MdlSheet[]>();
-
-  useEffect(() => {
-    api.get('/fichas').then(res => {
-      setChars(res.data);
-    });
-  }, []);
 
   return <div className='flex-cards'>
     {
-      chars == null || chars === undefined ? <p>Loading...</p> : chars
-      .filter(char => char.Name.toLowerCase().includes(props.filter.toLowerCase()))
-      .sort((a, b) => a.Name.localeCompare(b.Name))
-      .map(char => { return <Char key={char.Id} name={char.Name} img={char.ImgUrl} /> })
+      props.fichas.map(char => { return <Char key={char.id} id={char.id} name={char.nome} img={char.imgUrl} /> })
     }
   </div>
 }

@@ -1,10 +1,47 @@
+import './index.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { createBrowserRouter } from 'react-router'
+import { RouterProvider } from 'react-router'
+import { api } from '@services/api';
+
+import Home from './pages/Home.tsx'
+import FichaManager from '@/pages/FichaManager.tsx'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    Component: Home,
+    loader: async () => {
+      try {
+        const resp = await api.get('/ficha-t20');
+        return resp.data;
+      }
+      catch (err) {
+        console.error('Error fetching fichas:', err);
+        return null;
+      }
+    },
+  },
+  {
+    path: 'ficha/:id?',
+    loader: async ({ params }) => {
+      if (!params.id) return null;
+      try {
+        const resp = await api.get('/ficha-t20/' + params.id);
+        return resp.data;
+      }
+      catch (err) {
+        console.error('Error fetching fichas:', err);
+        return null;
+      }
+    },
+    Component: FichaManager
+  },
+])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>,
 )
