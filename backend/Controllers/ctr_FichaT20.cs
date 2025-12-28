@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text.Json;
+using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,19 +45,21 @@ public class CtrFicha : ControllerBase
             return NotFound();
         }
 
-        // var dto = _mapper.Map<Models.FichaT20Dto>(ficha);
-        return Ok(/* dto */);
+        return Ok(ficha);
     }
 
     [HttpPost("ficha-t20")]
     public async Task<IActionResult> CreateFicha([FromBody] Models.FichaT20Dto dto)
     {
-        // var fichaEntity = _mapper.Map<Models.FichaT20>(dto);
-        // _db.FichaT20.Add(fichaEntity);
+        if (dto.Gerais?.Nome == null) return BadRequest(new {error = "Propriedade [Gerais.Nome] é obrigatório"});
+
+        FichaT20 fichaEntity = new();
+        FichaT20Mapper.DtoToEntity(dto, fichaEntity);
+
+        _db.FichaT20.Add(fichaEntity);
         await _db.SaveChangesAsync();
         
-        // dto.Id = fichaEntity.Id;
-        return CreatedAtAction(nameof(GetFicha), new { id = dto.Id }, dto);
+        return CreatedAtAction(nameof(GetFicha), new { id = fichaEntity.Id }, fichaEntity);
     }
 
     [HttpPatch("ficha-t20/{id}")]
@@ -68,8 +71,7 @@ public class CtrFicha : ControllerBase
             return NotFound();
         }
 
-        // _mapper.Map(dto, existingFicha);
-        existingFicha.Id = id;
+        FichaT20Mapper.DtoToEntity(dto, existingFicha);
 
         await _db.SaveChangesAsync();
         return NoContent();
