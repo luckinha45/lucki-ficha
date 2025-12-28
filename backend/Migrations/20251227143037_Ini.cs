@@ -15,26 +15,28 @@ namespace backend.Migrations
                 name: "FichaT20",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Classe = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Raca = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Nivel = table.Column<int>(type: "int", nullable: false),
-                    Experiencia = table.Column<int>(type: "int", nullable: false),
-                    Dinheiro = table.Column<int>(type: "int", nullable: false),
-                    VidaAtual = table.Column<int>(type: "int", nullable: false),
-                    VidaMaxima = table.Column<int>(type: "int", nullable: false),
-                    ManaAtual = table.Column<int>(type: "int", nullable: false),
-                    ManaMaxima = table.Column<int>(type: "int", nullable: false),
-                    Forca = table.Column<int>(type: "int", nullable: false),
-                    Destreza = table.Column<int>(type: "int", nullable: false),
-                    Constituicao = table.Column<int>(type: "int", nullable: false),
-                    Inteligencia = table.Column<int>(type: "int", nullable: false),
-                    Sabedoria = table.Column<int>(type: "int", nullable: false),
-                    Carisma = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Atributos_Carisma = table.Column<int>(type: "INTEGER", nullable: false),
+                    Atributos_Constituicao = table.Column<int>(type: "INTEGER", nullable: false),
+                    Atributos_Destreza = table.Column<int>(type: "INTEGER", nullable: false),
+                    Atributos_Forca = table.Column<int>(type: "INTEGER", nullable: false),
+                    Atributos_Inteligencia = table.Column<int>(type: "INTEGER", nullable: false),
+                    Atributos_Sabedoria = table.Column<int>(type: "INTEGER", nullable: false),
+                    Gerais_Classe = table.Column<string>(type: "TEXT", nullable: false),
+                    Gerais_Dinheiro = table.Column<int>(type: "INTEGER", nullable: false),
+                    Gerais_Experiencia = table.Column<int>(type: "INTEGER", nullable: false),
+                    Gerais_ImgUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    Gerais_Nivel = table.Column<int>(type: "INTEGER", nullable: false),
+                    Gerais_Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    Gerais_Raca = table.Column<string>(type: "TEXT", nullable: false),
+                    Mana_Atual = table.Column<int>(type: "INTEGER", nullable: false),
+                    Mana_Maximo = table.Column<int>(type: "INTEGER", nullable: false),
+                    Mana_Temp = table.Column<int>(type: "INTEGER", nullable: false),
+                    Vida_Atual = table.Column<int>(type: "INTEGER", nullable: false),
+                    Vida_Maximo = table.Column<int>(type: "INTEGER", nullable: false),
+                    Vida_Temp = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,14 +47,14 @@ namespace backend.Migrations
                 name: "EquipamentoT20",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Descr = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Peso = table.Column<int>(type: "int", nullable: false),
-                    Preco = table.Column<int>(type: "int", nullable: false),
-                    FichaT20Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    Descr = table.Column<string>(type: "TEXT", nullable: true),
+                    Peso = table.Column<int>(type: "INTEGER", nullable: false),
+                    Preco = table.Column<int>(type: "INTEGER", nullable: false),
+                    FichaT20Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,13 +71,13 @@ namespace backend.Migrations
                 name: "HabilidadeT20",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FichaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    FichaId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    Descricao = table.Column<string>(type: "TEXT", nullable: false),
+                    Tipo = table.Column<string>(type: "TEXT", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -92,12 +94,12 @@ namespace backend.Migrations
                 name: "PericiaT20",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Valor = table.Column<int>(type: "int", nullable: false),
-                    FichaT20Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    Valor = table.Column<int>(type: "INTEGER", nullable: false),
+                    FichaT20Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,15 +116,15 @@ namespace backend.Migrations
                 name: "ModT20",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    HabilidadeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    EquipamentoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AplicaEm = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Valor = table.Column<int>(type: "int", nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    HabilidadeId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    EquipamentoId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    AplicaEm = table.Column<string>(type: "TEXT", nullable: false),
+                    Valor = table.Column<int>(type: "INTEGER", nullable: false),
+                    Ativo = table.Column<bool>(type: "INTEGER", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -16,6 +16,14 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Models.FichaT20>(e => 
+        {
+            e.ComplexProperty(f => f.Gerais);
+            e.ComplexProperty(f => f.Vida);
+            e.ComplexProperty(f => f.Mana);
+            e.ComplexProperty(f => f.Atributos);
+        });
+
         // Configure the one-to-many relationship between mdl_FichaT20 and mdl_HabilidadeT20
         modelBuilder.Entity<Models.FichaT20>()
             .HasMany(e => e.Habilidades)

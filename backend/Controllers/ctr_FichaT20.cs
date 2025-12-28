@@ -1,6 +1,5 @@
 using System.Reflection;
 using System.Text.Json;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,12 +10,10 @@ namespace backend.Controllers;
 public class CtrFicha : ControllerBase
 {
     private readonly AppDbContext _db;
-    private readonly IMapper _mapper;
     
-    public CtrFicha(AppDbContext db, IMapper mapper)
+    public CtrFicha(AppDbContext db)
     {
         _db = db;
-        _mapper = mapper;
     }
 
     [HttpGet("ficha-t20")]
@@ -28,9 +25,8 @@ public class CtrFicha : ControllerBase
             // .Include(f => f.Pericias)
             .ToListAsync();
 
-
         // var fichasDto = _mapper.Map<List<Models.FichaT20Dto>>(fichas);
-        return Ok(fichas.Select(f => new { f.Id, f.Nome, f.ImgUrl }));
+        return Ok(fichas.Select(f => new { f.Id, f.Gerais.Nome, f.Gerais.ImgUrl }));
     }
 
     [HttpGet("ficha-t20/{id}")]
@@ -48,17 +44,19 @@ public class CtrFicha : ControllerBase
             return NotFound();
         }
 
-        var dto = _mapper.Map<Models.FichaT20Dto>(ficha);
-        return Ok(dto);
+        // var dto = _mapper.Map<Models.FichaT20Dto>(ficha);
+        return Ok(/* dto */);
     }
 
     [HttpPost("ficha-t20")]
-    public async Task<IActionResult> CreateFicha([FromBody] Models.FichaT20Dto ficha)
+    public async Task<IActionResult> CreateFicha([FromBody] Models.FichaT20Dto dto)
     {
-        var fichaEntity = _mapper.Map<Models.FichaT20>(ficha);
-        _db.FichaT20.Add(fichaEntity);
+        // var fichaEntity = _mapper.Map<Models.FichaT20>(dto);
+        // _db.FichaT20.Add(fichaEntity);
         await _db.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetFichas), new { id = ficha.Id }, ficha);
+        
+        // dto.Id = fichaEntity.Id;
+        return CreatedAtAction(nameof(GetFicha), new { id = dto.Id }, dto);
     }
 
     [HttpPatch("ficha-t20/{id}")]
@@ -70,7 +68,7 @@ public class CtrFicha : ControllerBase
             return NotFound();
         }
 
-        _mapper.Map(dto, existingFicha);
+        // _mapper.Map(dto, existingFicha);
         existingFicha.Id = id;
 
         await _db.SaveChangesAsync();

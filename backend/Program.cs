@@ -2,21 +2,43 @@ using backend;
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
 using Microsoft.Build.Framework;
+using System.Text.Json;
 
 Env.Load();
 
+bool production = Environment.GetEnvironmentVariable("PRODUCTION") == "true";
+
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
-builder.Services.AddAutoMapper(typeof(MappingProfile));
-builder.Services.AddDbContext<AppDbContext>(opttionsbuilder =>
+
+if (production)
 {
-    string dbServer = Environment.GetEnvironmentVariable("DB_SERVER") ?? throw new InvalidOperationException("DB_SERVER env is not set");
-    string dbName = Environment.GetEnvironmentVariable("DB_NAME")  ?? throw new InvalidOperationException("DB_NAME env is not set");
-    string dbUser = Environment.GetEnvironmentVariable("DB_USER") ?? throw new InvalidOperationException("DB_USER env is not set");
-    string dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? throw new InvalidOperationException("DB_PASSWORD env is not set");
-    opttionsbuilder.UseSqlServer(
-        $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPassword};TrustServerCertificate=Yes;"
-    );
+    Console.WriteLine("Running in Production mode");
+    builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Warning);
+}
+else
+{
+    Console.WriteLine("Running in Development mode");
+    builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Debug);
+}
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    });
+
+builder.Services.AddDbContext<AppDbContext>(optionsbuilder =>
+{
+    // string dbServer = Environment.GetEnvironmentVariable("DB_SERVER") ?? throw new InvalidOperationException("DB_SERVER env is not set");
+    // string dbName = Environment.GetEnvironmentVariable("DB_NAME")  ?? throw new InvalidOperationException("DB_NAME env is not set");
+    // string dbUser = Environment.GetEnvironmentVariable("DB_USER") ?? throw new InvalidOperationException("DB_USER env is not set");
+    // string dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? throw new InvalidOperationException("DB_PASSWORD env is not set");
+    // optionsbuilder.UseSqlServer(
+    //     $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPassword};TrustServerCertificate=Yes;"
+    // );
+
+    optionsbuilder.UseSqlite(@"Data Source=Database.db");
 });
 
 builder.Services.AddCors(options =>
