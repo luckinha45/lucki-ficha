@@ -1,7 +1,7 @@
 export interface FichaT20 {
   id: string | null;
   gerais: {
-    nome: string | null;
+    nome: string;
     imgUrl: string;
     classe: string | null;
     raca: string | null;

@@ -10,7 +10,7 @@ export default function CharList(props: Props) {
 
   return <div className='flex-cards'>
     {
-      props.fichas.map(char => { return <Char key={char.id} id={char.id} name={char.nome} img={char.imgUrl} /> })
+      props.fichas.map(char => { return <Char key={char.id} id={char.id ?? ''} name={char.gerais.nome} img={char.gerais.imgUrl} /> })
     }
   </div>
 }

@@ -14,7 +14,7 @@ export default function Char(props: Props) {
     <Link to={`/ficha/${props.id}`}  style={{ textDecoration: 'none' }}>
       <div className="char">
         <img className="char-image"
-          src={!props.img ? noImg : props.img}
+          src={props.img ? props.img : noImg}
           alt={props.name}
         />
         <h2 className="char-name">{props.name}</h2>

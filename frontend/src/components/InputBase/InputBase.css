@@ -1,3 +1,22 @@
 .inpt-base {
-  
+    position: relative;
+    /* margin: 10px; */
+
+    & > label {
+        position: absolute;
+        padding: 0 4px 0 4px;
+        z-index: 1;
+        top: 25px;
+        left: 0px;
+        border: 1px solid white;
+        background-color: #ac3233;
+        color: white;
+        font-size: 0.8rem;
+    }
+
+    & > input {
+        padding: 6px 0px 10px 4px;
+        border-radius: 5px 5px 5px 0px;
+        border: 1px solid white;
+    }
 }

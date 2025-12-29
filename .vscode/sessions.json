@@ -10,7 +10,7 @@
         {
           "name": "Backend",
           "icon": "server",
-          "color": "terminal.ansiCyan",
+          "color": "terminal.ansiYellow",
           "cwd": "./backend",
           "commands": [
             ""
@@ -19,7 +19,7 @@
         {
           "name": "Frontend",
           "icon": "browser",
-          "color": "terminal.ansiGreen",
+          "color": "terminal.ansiCyan",
           "cwd": "./frontend",
           "commands": [
             ""

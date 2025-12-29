@@ -27,7 +27,7 @@ public class CtrFicha : ControllerBase
             .ToListAsync();
 
         // var fichasDto = _mapper.Map<List<Models.FichaT20Dto>>(fichas);
-        return Ok(fichas.Select(f => new { f.Id, f.Gerais.Nome, f.Gerais.ImgUrl }));
+        return Ok(fichas.Select(f => new { f.Id, f.Gerais }));
     }
 
     [HttpGet("ficha-t20/{id}")]
