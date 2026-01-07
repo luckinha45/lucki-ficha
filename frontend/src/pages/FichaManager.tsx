@@ -6,6 +6,7 @@ import { useState } from "react";
 import { api } from "@/services/api";
 import noImg from '@assets/no-img.png';
 import "./FichaManager.css";
+import InputAttr from "@/components/InputAttr/InputAttr";
 
 
 export default function FichaManager() {
@@ -40,6 +41,21 @@ export default function FichaManager() {
           <InputBase label="Experiência" content='experiencia' width="50px" />
         </div>
         <div className="pericias">PERICIAS</div>
+        <div className="atributos">
+          <InputAttr label="For" content='forca' />
+          <InputAttr label="Des" content='destreza' />
+          <InputAttr label="Con" content='constituicao' />
+          <InputAttr label="Int" content='inteligencia' />
+          <InputAttr label="Sab" content='sabedoria' />
+          <InputAttr label="Car" content='carisma' />
+        </div>
+        <div className="infos-mid">
+          <div>PV</div>
+          <div>PM</div>
+          <div>DEFESA</div>
+          <div>DESLOC</div>
+          <div>TAMANHO</div>
+        </div>
       </div>
     </div>
   </FichaContext.Provider>
